@@ -1,0 +1,12 @@
+export 'package:veegil_accessment/view/screens/auth/login_screen.dart';
+export 'package:veegil_accessment/view/screens/onboarding/splash_screen.dart';
+export 'package:veegil_accessment/view/screens/auth/create_account_screen.dart';
+// export 'package:veegil_accessment/view/screens/dashboard/home_screen/home_screen.dart';
+// export 'package:veegil_accessment/view/screens/dashboard/bookings_screen/bookings_screen.dart';
+// export 'package:veegil_accessment/view/screens/dashboard/message_screen/message_screen.dart';
+// export 'package:veegil_accessment/view/screens/dashboard/notification_screen/notification_screen.dart';
+export 'package:flutter_screenutil/flutter_screenutil.dart';
+export  'package:flutter/material.dart';
+export 'package:veegil_accessment/config/app_strings.dart';
+// export 'package:veegil_accessment/view/screens/auth/verify_email_screen.dart';
+// export  'package:veegil_accessment/view/screens/auth/reset_password_screens/reset_password_screen.dart';
