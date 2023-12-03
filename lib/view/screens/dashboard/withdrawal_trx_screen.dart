@@ -46,7 +46,7 @@ class _WithdrawalTransactionsScreenState extends ConsumerState<WithdrawalTransac
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
         displayModalNavBar(context, WalletAction.withdrawal, ref);
-      }, child: const Icon(Icons.remove),),
+      }, backgroundColor: Colors.blue, child: const Icon(Icons.remove, color: Colors.white,),),
     );
   }
 }

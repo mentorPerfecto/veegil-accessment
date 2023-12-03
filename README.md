@@ -1,16 +1,58 @@
-# veegil_accessment
 
-A new Flutter project.
+# An accessment Task by Marshall Odii
+
+## Overview
+
+This project was basically built with the MVVM architeture, riverpod was m preffered go to state management 
+and I used flutter screen utlities for state management. 
+
+
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+- [Flutter SDK](https://flutter.dev/docs/get-started/install) installed
+- [Dart SDK](https://dart.dev/get-dart) installed
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Follow these steps to set up and run the project locally.
 
-A few resources to get you started if this is your first Flutter project:
+### 1. Clone the Repository
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```bash
+git clone https://github.com/your-username/your-flutter-project.git
+cd your-flutter-project
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 2.Install Dependencies
+
+```bash
+flutter pub get
+```
+
+
+
+### 3. Run the Application
+
+```bash
+flutter run
+```
+
+
+### 4. Build the Application
+
+```bash
+flutter build apk -- releae
+```
+
+### 5. Folder Structure
+
+lib/
+|-- config/
+|-- model/
+|-- repository/
+|-- src/
+|-- utils/
+|-- view/
+|-- view_model/
+|-- main.dart

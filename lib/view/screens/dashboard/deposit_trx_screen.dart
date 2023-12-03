@@ -46,7 +46,7 @@ class _DepositTransactionsScreenState extends ConsumerState<DepositTransactionsS
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
         displayModalNavBar(context, WalletAction.deposit, ref);
-      }, child: const Icon(Icons.add),),
+      }, backgroundColor: Colors.blue, child: const Icon(Icons.add, color: Colors.white,),),
     );
   }
 }
