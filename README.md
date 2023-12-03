@@ -56,3 +56,6 @@ lib/
 |-- view/
 |-- view_model/
 |-- main.dart
+
+
+- [Link to APK](https://drive.google.com/drive/u/1/folders/1J40FBc1XVrVhOHGBMz9-iWSJc-VFZ0RO) installed
