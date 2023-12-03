@@ -9,7 +9,7 @@ export 'package:veegil_accessment/view/components/gradient_painter.dart';
 export 'package:veegil_accessment/view/components/gradient_button.dart';
 export 'package:veegil_accessment/view/components/onboarding_circular_button.dart';
 export 'package:veegil_accessment/view/components/circular_profile_progress_indicator.dart';
-
+export 'package:veegil_accessment/view/components/wallet_action_screen.dart';
 
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:veegil_accessment/config/app_colors.dart';

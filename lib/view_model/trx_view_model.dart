@@ -15,6 +15,7 @@ class OnboardingViewModel extends ChangeNotifier {
 
   List<TrxResponseModel> trxList = [];
   bool isGettingData = true;
+  bool isGettingTrx = false;
 
   Future<dynamic> getTransactions() async {
 
@@ -25,10 +26,10 @@ class OnboardingViewModel extends ChangeNotifier {
           final decodedResponse = jsonDecode(value.toString());
           if (decodedResponse['status'] == 'success') {
             var resBody =   decodedResponse as Map<String, dynamic>;
-            trxList =  (resBody as List).map((e) => TrxResponseModel.fromJson(e)).toList();
-            isGettingData = false;
-            notifyListeners();
+            trxList =  (resBody['data'] as List).map((e) => TrxResponseModel.fromJson(e)).toList().reversed.toList();
           }
+          isGettingData = false;
+          notifyListeners();
         }
       }).onError((error, stackTrace) {
         logger
@@ -36,6 +37,94 @@ class OnboardingViewModel extends ChangeNotifier {
           ..e(stackTrace);
       });
     } catch (e) {
+      logger.e(e);
+    }
+  }
+
+
+
+
+  Future<dynamic> transfer(context, amount) async {
+    isGettingTrx = true;
+    notifyListeners();
+
+    try {
+      await trxService.transferFunds(amount: amount,
+          phone: DummyData.phoneNumber.toString())
+          .then((value) async {
+        if (value != null) {
+          logger.w(value['status']);
+          if (value['status'] == 'success') {
+            var resBody =   value as Map<String, dynamic>;
+            await getTransactions();
+            showToast(msg: resBody['message'].toString(), isError: false);
+            navigateBack(context);
+          }
+
+          isGettingTrx = false;
+          notifyListeners();
+        }
+      }).onError((error, stackTrace) {
+        isGettingTrx = false;
+        notifyListeners();
+        showToast(
+          msg: 'Something went wrong',
+          isError: true,
+        );
+        logger
+          ..e(error)
+          ..e(stackTrace);
+      });
+    } catch (e) {
+      isGettingTrx = false;
+      notifyListeners();
+      showToast(
+        msg: 'Something went wrong',
+        isError: true,
+      );
+      logger.e(e);
+    }
+  }
+
+
+  Future<dynamic> withdraw(context, amount) async {
+    isGettingTrx = true;
+    notifyListeners();
+
+    try {
+      await trxService.withdrawFunds(amount: amount,
+          phone: DummyData.phoneNumber.toString())
+          .then((value) async {
+        if (value != null) {
+          // final decodedResponse = jsonDecode(value.toString());
+          logger.w(value['status']);
+          if (value['status'] == 'success') {
+            var resBody =   value as Map<String, dynamic>;
+            await getTransactions();
+            showToast(msg: resBody['message'].toString(), isError: false);
+            navigateBack(context);
+          }
+          isGettingTrx = false;
+          notifyListeners();
+        }
+      }).onError((error, stackTrace) {
+        logger
+          ..e(error)
+          ..e(stackTrace);
+        showToast(
+          msg: 'Something went wrong',
+          isError: true,
+        );
+        isGettingTrx = false;
+        notifyListeners();
+      });
+    } catch (e) {
+      isGettingTrx = false;
+      notifyListeners();
+      showToast(
+        msg: 'Something went wrong',
+        isError: true,
+      );
       logger.e(e);
     }
   }

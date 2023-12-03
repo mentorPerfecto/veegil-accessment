@@ -1,4 +1,8 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:veegil_accessment/src/components.dart';
+import 'package:veegil_accessment/utils/enums.dart';
+import 'package:veegil_accessment/view_model/trx_view_model.dart';
+
 
 showBottomModalSheet(BuildContext context, {
   required Widget widget
@@ -47,4 +51,18 @@ showLocaleBottomModalSheet(BuildContext context, {
     },
   );
 }
+
+
+
+void displayModalNavBar(context, WalletAction walletAction, WidgetRef ref) {
+  showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.r), topRight: Radius.circular(30.r)),
+      ),
+      builder: (BuildContext context) {
+        return WalletActionScreen(walletAction: walletAction,);}).whenComplete(() => ref.watch(trxViewModel).getTransactions());
+}
+
 

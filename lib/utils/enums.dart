@@ -10,18 +10,8 @@ enum ButtonState {
 
 
 
-enum AppNameRoutes {
-  accountInit,
-  login,
-  dashboard,
-  forgotPassword
+enum WalletAction {
+  deposit,
+  withdrawal,
 }
-
-enum UserGender {
-  male,
-  female,
-  other,
-  prefernottosay,
-}
-
 

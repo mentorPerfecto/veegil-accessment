@@ -9,7 +9,7 @@ class ApiConstants {
   // final String apiVersion = '/v1';
 
   final authPath = 'auth';
-  final acctPath = 'auth';
+  final acctPath = 'accounts';
   // final employerOrgPath = 'employer/organization';
 
   Uri get loginUri =>
@@ -17,14 +17,14 @@ class ApiConstants {
 
   Uri get signUpUri =>
       Uri(scheme: scheme, host: host, path: '$authPath/signup');
-  
+
   Uri get transferUri =>
       Uri(scheme: scheme, host: host, path: '$acctPath/transfer');
   Uri get withdrawUri =>
     Uri(scheme: scheme, host: host, path: '$acctPath/withdraw');
 
   Uri get transactionsUri =>
-    Uri(scheme: scheme, host: host, path: '$acctPath/transactions');
+    Uri(scheme: scheme, host: host, path: '/transactions');
 
   // Uri  getEmployersUri ({ required String page, required String searchString}) => Uri(
   //   scheme: scheme,

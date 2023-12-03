@@ -1,5 +1,4 @@
 import 'package:veegil_accessment/src/components.dart';
-import 'package:veegil_accessment/utils/validator.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
@@ -26,7 +25,7 @@ class CustomTextField extends StatefulWidget {
     this.isFilled = true,
     this.fillColor = AppColors.kFormfieldBlueFill,
     this.borderColor,
-    // this.validator,
+    this.validator,
     this.onChanged,
     this.obscureInput = false,
     this.onObscureText,
@@ -40,7 +39,6 @@ class CustomTextField extends StatefulWidget {
     required this.focusNode,
     this.showError = false,
     this.errorText,
-    this.validators,
   });
 
   final String? hint;
@@ -64,7 +62,7 @@ class CustomTextField extends StatefulWidget {
   final bool isFilled;
   final Color? fillColor;
   final Color? borderColor;
-  // final FormFieldValidator<String>? validator;
+  final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onChanged;
   final bool obscureInput;
   final void Function()? onObscureText;
@@ -79,7 +77,6 @@ class CustomTextField extends StatefulWidget {
   final FocusNode focusNode;
   final bool? showError;
   final String? errorText;
-  final Validators? validators;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -89,12 +86,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   // myFocusNode = focusNode;
   @override
   Widget build(BuildContext context) {
-    String? myerrorText;
-    // widget.errorText.toString();
     final myFocusNode = widget.focusNode;
-    final validators = widget.validators;
-    var showError = widget.showError;
-    final Validators validatorOne = Validators();
     final theme = Theme.of(context);
     return Visibility(
       visible: widget.visibleField,
@@ -105,34 +97,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /* RichText(
-              text: TextSpan(
-                text: fieldLabel,
-                style: theme.textTheme.labelLarge!.copyWith(
-                  color: AppColors.kPrimaryColor,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 14,
-                  fontFamily: 'Poppins',
-                ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: labelHint.isNotEmpty ? ' ($labelHint)' : '',
-                    style: theme.textTheme.labelLarge!.copyWith(
-                      color: AppColors.KFormfieldBlueBorder,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 11,
-                      fontFamily: 'Poppins',
-                    ),
-                  ),
-                ],
-              ),
-            ),*/
-
-            // spacer between lable and text field
-            /*SizedBox.square(
-              dimension: spacing ?? 10,
-            ),*/
-
             TextFormField(
               maxLength: widget.maxlength,
               controller: widget.controller,
@@ -151,15 +115,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               enabled: widget.enabled,
               textAlign: widget.textAlign,
               maxLines: widget.maxLines ?? 1,
-              // validator: widget.validators,
-              // onChanged: onChanged,
-              onChanged: (text) {
-                setState(() {
-                  myerrorText =validatorOne.validateEmail(text);
-                  // validateText(text, widget.validators!.validateEmail);
-                  showError = myerrorText != null;
-                });
-              },
+              validator: widget.validator,
               obscureText: widget.obscureInput,
               decoration: InputDecoration(
                 border: widget.readOnly ? InputBorder.none : null,

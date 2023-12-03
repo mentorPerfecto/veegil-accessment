@@ -4,12 +4,12 @@ import 'package:veegil_accessment/repository/services/api/api_service.dart';
 class TransactionBackend extends ApiService {
   Future<dynamic> transferFunds({
     required String phone,
-    required String password,
+    required String amount,
   }) async {
     return postMth(
-      loginUri,
+      transferUri,
       headers: apiHeader,
-      body: {'phoneNumber': phone, 'password': password},
+      body: {'phoneNumber': phone, 'amount': amount},
     );
   }
 
@@ -17,12 +17,12 @@ class TransactionBackend extends ApiService {
 
   Future<dynamic> withdrawFunds({
     required String phone,
-    required String password,
+    required String amount,
   }) async {
     return postMth(
-      loginUri,
+      withdrawUri,
       headers: apiHeader,
-      body: {'phoneNumber': phone, 'password': password},
+      body: {'phoneNumber': phone, 'amount': amount},
     );
   }
 
@@ -30,7 +30,7 @@ class TransactionBackend extends ApiService {
 
   Future<dynamic> fetchTransactions() async {
     return getMth(
-      loginUri,
+      transactionsUri,
       headers: apiHeader,
     );
   }

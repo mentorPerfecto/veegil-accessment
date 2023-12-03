@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:veegil_accessment/src/screens.dart';
 
 class GradientButton extends StatelessWidget {

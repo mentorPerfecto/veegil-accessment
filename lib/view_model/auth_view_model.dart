@@ -3,7 +3,6 @@
 import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:veegil_accessment/model/response/registration_successful_response_model.dart';
 import 'package:veegil_accessment/src/models.dart';
 import 'package:veegil_accessment/src/repository.dart';
 import 'package:veegil_accessment/src/screens.dart';
@@ -176,12 +175,8 @@ class AuthViewModel extends ChangeNotifier {
       )
           .then((value) async {
         if (value != null) {
-          final decodeResponse = value;
 
           if (value['status'].toString() == 'success') {
-            ResponseData.loginSuccessfulResponseModel =
-                LoginSuccessfulResponseModel.fromJson(
-                    decodeResponse as Map<String, dynamic>);
 
             showToast(
               msg: 'Login successful',
@@ -195,10 +190,10 @@ class AuthViewModel extends ChangeNotifier {
 
             DummyData.password = passwordRegisterController.text;
 
-            await saveUserPhone(DummyData.phoneNumber);
+            await saveUserPhone(_phoneNoController.text);
             await getUserPhoneNumber();
             await saveAppTme();
-            await saveUserPassword(DummyData.password);
+            await saveUserPassword(_passwordController.text);
             await getUserPassword();
             await Future.delayed(const Duration(milliseconds: 1000));
 
@@ -248,21 +243,6 @@ class AuthViewModel extends ChangeNotifier {
           logger.w(decodeResponse);
           if (value['status'].toString() == 'success') {
             logger.f(value.toString());
-            // var decodeResponse = jsonDecode(value);
-
-            ResponseData.registrationSuccessfulResponseModel =
-                RegistrationSuccessfulResponseModel.fromJson(
-                    decodeResponse as Map<String, dynamic>);
-            // DummyData.email =ResponseData.registrationSuccessfulResponseModel!.data!.email.toString();
-            DummyData.phoneNumber = _phoneNoSignUpController.text;
-            // DummyData.password =
-            //     passwordRegisterController.text;
-            DummyData.password = passwordRegisterController.text;
-            await saveUserPhone(DummyData.phoneNumber);
-            await getUserPhoneNumber();
-            await saveAppTme();
-            await saveUserPassword(DummyData.password);
-            await getUserPassword();
             _buttonRegisterState = CustomButtonState(
               buttonState: ButtonState.idle,
               text: login,
