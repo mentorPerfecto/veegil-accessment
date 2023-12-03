@@ -104,7 +104,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       children: [
         CustomTextField(
           fieldLabel: '',
-          hint: "Email Address or Username",
+          hint: "Phone number",
           controller: provider.phoneNoController, focusNode: emailFocusNode,
 
         ),
