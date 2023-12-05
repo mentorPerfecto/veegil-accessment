@@ -37,9 +37,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             const TextView(text: "Balance"),
-            TextView(text: "NGN ${UtilFunctions.formatAmount(double.parse((provider.acctBalance!.balance ?? 0 ).toString()))}", fontSize: 30,),
+            TextView(text: "NGN ${UtilFunctions.formatAmount(double.parse((provider.acctBalance!.balance ?? 0 ).toString()))}", fontSize: 30, fontWeight: FontWeight.bold,),
           ],
         ),
       ),

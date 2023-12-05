@@ -13,18 +13,27 @@ class TrxItemDesign extends StatelessWidget {
       child: Card(surfaceTintColor: Colors.white,
         child: ListTile(
           //minLeadingWidth: 50,
-          title: TextView(
-              text: trxResponseModel.phoneNumber.toString(),
-              maxLines: 1,
-              textOverflow: TextOverflow.ellipsis,
-              fontSize: 12.sp, fontWeight: FontWeight.w500
+          leading: const Icon(Icons.wallet_giftcard, color: Colors.purple,),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextView(
+                  text: trxResponseModel.phoneNumber.toString(),
+                  maxLines: 1,
+                  textOverflow: TextOverflow.ellipsis,
+                  fontSize: 12.sp, fontWeight: FontWeight.w500
+              ),
+              TextView( text:  UtilFunctions.formatDate(trxResponseModel.created.toString()),
+                fontSize: 12.sp,  fontWeight: FontWeight.w500, color: Colors.grey,
+              ),
+            ],
           ),
           trailing: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextView( text: 'N ${UtilFunctions.formatAmount(double.parse(trxResponseModel.amount != null ? trxResponseModel.amount.toString() : '0'))}',
-                  fontSize: 12.sp, fontWeight: FontWeight.w500
+              TextView( text: 'NGN ${UtilFunctions.formatAmount(double.parse(trxResponseModel.amount != null ? trxResponseModel.amount.toString() : '0'))}',
+                  fontSize: 12.sp, fontWeight: FontWeight.bold
               ),
               TextView( text:  UtilFunctions.capitalizeAllWord(trxResponseModel.type.toString()),
                 fontSize: 12.sp,

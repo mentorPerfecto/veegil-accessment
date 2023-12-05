@@ -35,7 +35,6 @@ class _WalletActionScreenState extends ConsumerState<WalletActionScreen> {
               alignment: Alignment.center,
               child: Container(
                 height: 40.h,
-                width: MediaQuery.of(context).size.width / 1.5,
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(30.0),
@@ -45,57 +44,70 @@ class _WalletActionScreenState extends ConsumerState<WalletActionScreen> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 15.h,
-            ),
-            SizedBox(
-              height: 15.h,
-            ),
-            Form(
-              key: formKey,
-              child: CustomTextField(fieldLabel: 'Enter Amount for ${widget.walletAction.name}', hint: 'Enter Amount for ${widget.walletAction.name}', focusNode: focusNode,
-              controller: amountController,  validator: (value) => Validators().validateInteger(value!),),
-            ),
-            SizedBox(
-              height: 70.h,
-            ),
             provider.isGettingTrx
-                ? const Center(child: CircularProgressIndicator())
-                : SizedBox(
-                    height: 50,
-                    width: double.infinity,
-                    child: Center(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(12), // <-- Radius
+                ? SizedBox(height: 400.h,
+                child: const Center(child: CircularProgressIndicator()))
+                :Column(
+              children: [
+                SizedBox(
+                  height: 15.h,
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                Form(
+                  key: formKey,
+                  child: CustomTextField(fieldLabel: 'Enter Amount for ${widget.walletAction.name}', hint: 'Enter Amount for ${widget.walletAction.name}', focusNode: focusNode,
+                  controller: amountController,  validator: (value) => Validators().validateInteger(value!),),
+                ),
+                SizedBox(
+                  height: 70.h,
+                ),
+                 SizedBox(
+                        height: 50,
+                        width: double.infinity,
+                        child: Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(12), // <-- Radius
+                                ),
+                                backgroundColor: Colors.black,
+
+                                ///maximumSize:  Size.fromWidth(100.w),
+                                minimumSize: Size.fromWidth(250.w)),
+
+                            ///check if the validation is successful
+                            onPressed: () async {
+                              if (formKey.currentState!.validate()) {
+                                if (  widget.walletAction == WalletAction.withdrawal ) {
+
+                                  if(double.parse(amountController.text.toString()) <= double.parse(provider.acctBalance!.balance.toString())){
+                                    provider.withdraw(context, amountController.text);
+                                  } else {
+                                    showToast(msg: "Can't withdraw more than NGN ${UtilFunctions.formatAmount(double.parse(provider.acctBalance!.balance.toString()))}", isError: true);
+                                  }
+
+                                } else {
+                                  provider.transfer(context, amountController.text);
+                                }
+                              }
+                                  },
+                            child: const Text(
+                              'Submit',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                            backgroundColor: Colors.black,
-
-                            ///maximumSize:  Size.fromWidth(100.w),
-                            minimumSize: Size.fromWidth(250.w)),
-
-                        ///check if the validation is successful
-                        onPressed: () async {
-                          if (formKey.currentState!.validate()) {
-                            widget.walletAction == WalletAction.withdrawal ?
-                            provider.withdraw(context, amountController.text):
-                            provider.transfer(context, amountController.text);
-                          }
-                              },
-                        child: const Text(
-                          'Submit',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                    ),
-                  ),
-            SizedBox(
-              height: 30.h,
+                SizedBox(
+                  height: 30.h,
+                ),
+              ],
             ),
           ],
         ),
