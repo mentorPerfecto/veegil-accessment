@@ -35,7 +35,6 @@ class _AllTransactionsScreenState extends ConsumerState<AllTransactionsScreen> {
         )
             :
         ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,
           itemBuilder: (BuildContext context, int index) {
             return TrxItemDesign(trxResponseModel: transactions[index],);

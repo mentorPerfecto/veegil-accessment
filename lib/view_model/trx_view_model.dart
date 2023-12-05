@@ -18,7 +18,6 @@ class OnboardingViewModel extends ChangeNotifier {
   bool isGettingTrx = false;
 
   Future<dynamic> getTransactions() async {
-
     try {
       await trxService.fetchTransactions()
           .then((value) {
@@ -31,23 +30,16 @@ class OnboardingViewModel extends ChangeNotifier {
           isGettingData = false;
           notifyListeners();
         }
-      }).onError((error, stackTrace) {
-        logger
-          ..e(error)
-          ..e(stackTrace);
+      }).onError((error, stackTrace) {logger..e(error)..e(stackTrace);
       });
     } catch (e) {
       logger.e(e);
     }
   }
 
-
-
-
   Future<dynamic> transfer(context, amount) async {
     isGettingTrx = true;
     notifyListeners();
-
     try {
       await trxService.transferFunds(amount: amount,
           phone: DummyData.phoneNumber.toString())
