@@ -34,4 +34,11 @@ class TransactionBackend extends ApiService {
       headers: apiHeader,
     );
   }
+
+  Future<dynamic> fetchAcctBalance() async {
+    return getMth(
+      acctBalanceUri,
+      headers: apiHeader,
+    );
+  }
 }

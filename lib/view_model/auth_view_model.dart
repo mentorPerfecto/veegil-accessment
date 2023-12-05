@@ -253,7 +253,7 @@ class AuthViewModel extends ChangeNotifier {
               isError: false,
             );
             await Future.delayed(const Duration(milliseconds: 1000));
-            await navigateReplace(context, const LoginScreen());
+            await navigateReplace(context, const DashboardScreen());
           } else if (value['status'].toString() == 'error') {
             showToast(
               msg: value['message'].toString(),

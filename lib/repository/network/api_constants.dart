@@ -18,6 +18,9 @@ class ApiConstants {
   Uri get signUpUri =>
       Uri(scheme: scheme, host: host, path: '$authPath/signup');
 
+  Uri get acctBalanceUri =>
+      Uri(scheme: scheme, host: host, path: '$authPath/users');
+
   Uri get transferUri =>
       Uri(scheme: scheme, host: host, path: '$acctPath/transfer');
   Uri get withdrawUri =>

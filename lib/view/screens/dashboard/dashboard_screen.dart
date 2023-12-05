@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:veegil_accessment/src/components.dart';
 import 'package:veegil_accessment/src/screens.dart';
+import 'package:veegil_accessment/src/utils.dart';
 import 'package:veegil_accessment/view_model/trx_view_model.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
@@ -26,11 +28,22 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     var provider =  ref.watch(trxViewModel);
-    return Scaffold(
-      body: provider.isGettingData ? SizedBox(
+    return  provider.isGettingData ? Scaffold(
+      body: Center(child:
+      SizedBox(
           height: 700.h,
-          child: const Center(child: CircularProgressIndicator())):
-      DefaultTabController(
+          child: const Center(child: CircularProgressIndicator())),),
+    ): Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Column(
+          children: [
+            const TextView(text: "Balance"),
+            TextView(text: "NGN ${UtilFunctions.formatAmount(double.parse((provider.acctBalance!.balance ?? 0 ).toString()))}", fontSize: 30,),
+          ],
+        ),
+      ),
+      body: DefaultTabController(
         length: tabs.length,
         // The Builder widget is used to have a different BuildContext to access
         // closest DefaultTabController.
