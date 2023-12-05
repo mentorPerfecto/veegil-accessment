@@ -35,8 +35,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           child: const Center(child: CircularProgressIndicator())),),
     ): Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         automaticallyImplyLeading: false,
         title: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             const TextView(text: "Balance"),
