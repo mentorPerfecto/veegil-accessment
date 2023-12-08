@@ -46,7 +46,13 @@ class ApiService extends ApiConstants with RetryFunc {
         isError: true,
       );
       throw InternetException(e.toString());
-    } on FormatException catch (error) {
+    } on DioException catch (error){
+      showToast(
+        msg: UtilFunctions.capitalizeAllWord(error.response!.data['message'] ?? "Something went wrong"),
+        isError: true,
+      );
+    }
+    on FormatException catch (error) {
       logger.e('FormatException: ${error.message}');
       // throw HttpException('Bad response format: ${error.message}');
       debugPrint(error.message);
@@ -59,13 +65,6 @@ class ApiService extends ApiConstants with RetryFunc {
     } catch (error) {
       logger.e(error);
       throw HttpException('Something went wrong, $error');
-
-      // responseJson = json.decode(response.data.toString());
-      // status = responseJson['status'] as String;
-      // message = responseJson['message'];
-      // if (message != null) {
-      //   showToast(msg: '$status\n$message', isError: true);
-      // }
     }
   }
 
@@ -313,7 +312,7 @@ class ApiService extends ApiConstants with RetryFunc {
           showToast(msg: '$status\n$message', isError: true);
         }
 
-        throw Exception(response.data);
+        throw BadRequestException(response.data.toString());
 
       case 500:
 

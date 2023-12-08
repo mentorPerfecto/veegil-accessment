@@ -34,18 +34,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           height: 700.h,
           child: const Center(child: CircularProgressIndicator())),),
     ): Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            const TextView(text: "Balance"),
-            TextView(text: "NGN ${UtilFunctions.formatAmount(double.parse((provider.acctBalance!.balance ?? 0 ).toString()))}", fontSize: 30, fontWeight: FontWeight.bold,),
-          ],
-        ),
-      ),
       body: DefaultTabController(
         length: tabs.length,
         // The Builder widget is used to have a different BuildContext to access
@@ -60,6 +48,16 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           });
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
+              automaticallyImplyLeading: false,
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const TextView(text: "Balance"),
+                  TextView(text: "NGN ${UtilFunctions.formatAmount(double.parse((provider.acctBalance!.balance ?? 0 ).toString()))}", fontSize: 30, fontWeight: FontWeight.bold,),
+                ],
+              ),
               bottom: TabBar(
                 tabs: tabs,
               ),

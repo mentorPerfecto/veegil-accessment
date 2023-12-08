@@ -19,7 +19,6 @@ class _AllTransactionsScreenState extends ConsumerState<AllTransactionsScreen> {
       body:  SizedBox(
         height:transactions.isEmpty ? 350.h : double.parse((transactions.length * 70).toString()),
         width: MediaQuery.of(context).size.width,
-
         ///color: Colors.red,
         child: transactions.isEmpty
             ? SizedBox(
